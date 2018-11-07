@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ML Model Breast Cancer Dataset</title>
+	<link href="../css/css.css" rel="stylesheet" type="text/css">
+	<script language="javascript" type="text/javascript" src="../../cgi-bin/js/index_bc.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="manifest" href="site.webmanifest">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+</head>
+
+<body onLoad="page_load()">
+<table width="1000" border="0" align="center" style="border-spacing: 0px">
+  <tbody>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="header">Demonstration Of Deployed TensorFlow Estimator API Machine Learning Model <br>Using Breast Cancer Dataset </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td style="background-color:#FFFF00">Notice:</td>
+      <td style="background-color:#FFFF00">All content found on this website, including: text, images, audio, or other formats were created for informational, demonstrational and educational purposes only. The Content is not intended to be a substitute for professional medical advice, diagnosis, or treatment.</td>
+	  <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="title">Enter measurements then click the "Predict" button</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+	<table width="100%" border="0">
+			  <tbody>
+				<tr>
+				  <td class="center"><input type="text" class="measurement_inputs" id="clump_t" size="7" value="0"/><br><span class="measurement_inputs">Clump Thickness</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="size_u" size="7"  value="0"/><br><span class="measurement_inputs">Size Uniformity</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="shape_u" size="7"  value="0"/><br><span class="measurement_inputs">Shape Uniformity</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				</tr>
+				<tr>
+				  <td class="center"><input type="text" class="measurement_inputs" id="marginal_a" size="7" value="0"/><br><span class="measurement_inputs">Marginal Adhesion</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="epithelial_s" size="7"  value="0"/><br><span class="measurement_inputs">Epithelial Size</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="bare_n" size="7"  value="0"/><br><span class="measurement_inputs">Bare Nucleoli</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="button" id="predict_button" class="predict_btn" value="Predict" onClick="predict()"></td>
+				  <td class="center"><span class="measurement_inputs" id="benign">00.0%</span><br><span class="measurement_inputs">Benign</span></td>
+				  <td class="center"><span class="measurement_inputs" id="malignant">00.0%</span><br><span class="measurement_inputs">Malignant</span></td>
+				</tr>
+				<tr>
+				  <td class="center"><input type="text" class="measurement_inputs" id="bland_c" size="7" value="0"/><br><span class="measurement_inputs">Bland Chromatin</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="normal_n" size="7"  value="0"/><br><span class="measurement_inputs">Normal Nucleoli</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center"><input type="text" class="measurement_inputs" id="mitoses" size="7"  value="0"/><br><span class="measurement_inputs">Mitoses</span></td>
+				  <td>&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+			  </tbody>
+			</table>
+		</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+	<table width="100%" border="0">
+			  <tbody>
+				  <td><br><input type="button" id="benign_button" class="predict_btn" value="Load Benign Data" onClick="benign()"><br><br>
+					  <input type="button" id="malignant_button" class="predict_btn" value="Load Malignant Data" onClick="malignant()"></td>
+				  <td>&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td>&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				  <td class="center">&nbsp;</td>
+				</tr>
+			  </tbody>
+			</table>
+		</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td class="ref_header">References:</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>Source code: <a href="https://github.com/mtm12/BreastCancerTFEstimator">https://github.com/mtm12/BreastCancerTFEstimator</a></td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>Model development video: <a href="https://youtu.be/zzltYDZnfwc">https://youtu.be/zzltYDZnfwc</a></td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>Model deployment video:</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>Dataset: <a href="http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Original)">http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Original)</a></td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td class="title">How it works</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td align="center"><img src="bcML_process.png"/></td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td class="center">&copy;2018 Marc McLean</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
